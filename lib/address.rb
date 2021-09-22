@@ -1,6 +1,7 @@
 require 'base58'
 require 'blake2b'
 
+ # The code is copy from https://github.com/itering/scale.rb/blob/develop/lib/common.rb
 class Address
     SS58_PREFIX = 'SS58PRE'
   

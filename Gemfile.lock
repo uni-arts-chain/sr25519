@@ -11,6 +11,7 @@ GEM
     base58 (0.2.3)
     blake2b (0.10.0)
     diff-lcs (1.4.4)
+    ffi (1.15.4)
     rake (13.0.6)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -30,6 +31,7 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
+  ffi (~> 1.15.0)
   rake (~> 13.0)
   rspec (~> 3.0)
   sr25519!
