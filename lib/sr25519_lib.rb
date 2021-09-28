@@ -71,7 +71,17 @@ class SR25519
     sig.to_s
   end
 
-  def self.sr25519_verify(address, message, signature_result)
+
+  # Creates a signature for given data
+  def self.sign(message, key_pair)
+    sig = SigMessage.new
+    msg = FFI::MemoryPointer.from_string(message)
+    public_key = key_pair.public_key
+    SR25519Lib.sr25519_sign(sig, public_key, key_pair, msg, message.length)
+    sig.to_s
+  end
+
+  def self.verify(address, message, signature_result)
     pk = PublicKey.new
     public_key = self.decode_address(address)
     public_key = [public_key].pack("H*").unpack("C*")
@@ -84,7 +94,7 @@ class SR25519
     end
     signature_result = [signature_result].pack("H*").unpack("C*")
     sig[:String].to_ptr.write_array_of_uint8(signature_result)
-    verify = SR25519Lib.sr25519_verify(sig, msg, message.size, pk)
+    verify = SR25519Lib.verify(sig, msg, message.size, pk)
   end
 
   def self.sr25519_keypair_from_seed(seed)
