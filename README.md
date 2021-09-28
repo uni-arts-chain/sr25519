@@ -76,11 +76,11 @@ rspec
 
 1. update to latest image
 
-   `docker pull uni-arts-chain/sr25519:latest`
+   `docker pull uniart/sr25519:latest`
 
 2. Run image:
 
-   `docker run -it uni-arts-chain/sr25519:latest`
+   `docker run -it uniart/sr25519:latest`
 
    This  will enter the container with a linux shell opened. 
 
