@@ -94,10 +94,13 @@ class SR25519
     end
     signature_result = [signature_result].pack("H*").unpack("C*")
     sig[:String].to_ptr.write_array_of_uint8(signature_result)
-    verify = SR25519Lib.verify(sig, msg, message.size, pk)
+    verify = SR25519Lib.sr25519_verify(sig, msg, message.size, pk)
   end
 
   def self.sr25519_keypair_from_seed(seed)
+    if seed.start_with?("0x")
+      seed = seed.sub(/0x/, "")
+    end
     seed_array = [seed].pack("H*").unpack("C*")
     seed = Seed.new
     seed[:String].to_ptr.write_array_of_uint8(seed_array)
