@@ -1,6 +1,6 @@
 # Sr25519
 
-This is a ruby libraray for Sr25519.
+This is a ruby libraray for Sr25519. Use to sign and verify message.
 
 More info at: https://github.com/w3f/schnorrkel
 
@@ -22,15 +22,21 @@ Or install it yourself as:
 
 ## Usage
 
-1.  keypair
+1. Require ed25519.rb in your Ruby program:
+```ruby
+require "sr25519"
+```
+
+2.  Generate keypair
 
 ```ruby
 # seed is priviate key, is a hex string.
+# example: SR25519.sr25519_keypair_from_seed("0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e")
 keypaire = SR25519.sr25519_keypair_from_seed(seed)
 
 ```
 
-2. public_key
+3. Generate public_key
 
 ```ruby
 public_key = SR25519.get_public_key_from_seed(seed)
@@ -40,25 +46,25 @@ public_key_str = public_key.to_s
 
 ```
 
-3. encode address
+4. Encode address
 ```ruby
 address = Address.encode(public_key.to_s)
 ```
 
-4. decode address
+5. Decode address
 
 ```ruby
 address = Address.decode(address)
 ```
 
-5. sign
+6. Sign message
 
 ```ruby
 signature_result = SR25519.sign(message, keypair)
 
 ```
 
-6. verify
+7. Verify message
 
 ```ruby
 SR25519.verify(address, message, signature_result)
@@ -74,13 +80,13 @@ rspec
 
 ## Docker
 
-1. update to latest image
+1. Update to latest image
 
    `docker pull uniart/sr25519:latest`
 
 2. Run image:
 
-   `docker run -it uniart/sr25519:latest`
+   `docker run -it uniart/sr25519:latest bash`
 
    This  will enter the container with a linux shell opened. 
 

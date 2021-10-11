@@ -26,4 +26,14 @@ RSpec.describe Sr25519 do
 
     expect(SR25519.verify(address, message, signature_result)).to eq(true)
   end
+
+  it "verify wrong messsage" do
+    alice_key = "e5be9a5092b81bca64be81d212e7f2f9eba183bb7a90954f7b76361f6edb5c0a"
+    public_key = SR25519.get_public_key_from_seed(alice_key).to_s
+    address = Address.encode(public_key)
+    message = "Hello world"
+    signature_result = SR25519.sr25519_sign(message, alice_key)
+
+    expect(SR25519.verify(address, message + "-test", signature_result)).to eq(false)
+  end
 end
