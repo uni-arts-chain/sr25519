@@ -22,12 +22,12 @@ Or install it yourself as:
 
 ## Usage
 
-1. Require ed25519.rb in your Ruby program:
+#### 1. Require ed25519.rb in your Ruby program:
 ```ruby
 require "sr25519"
 ```
 
-2.  Generate keypair
+#### 2.  Generate keypair
 
 ```ruby
 # seed is priviate key, is a hex string.
@@ -36,7 +36,7 @@ keypair = SR25519.sr25519_keypair_from_seed(seed)
 
 ```
 
-3. Generate public_key
+#### 3. Generate public_key
 
 ```ruby
 public_key = SR25519.get_public_key_from_seed(seed)
@@ -46,25 +46,25 @@ public_key_str = public_key.to_s
 
 ```
 
-4. Encode address
+#### 4. Encode address
 ```ruby
 address = Address.encode(public_key.to_s)
 ```
 
-5. Decode address
+#### 5. Decode address
 
 ```ruby
 address = Address.decode(address)
 ```
 
-6. Sign message
+#### 6. Sign message
 
 ```ruby
 signature_result = SR25519.sign(message, keypair)
 
 ```
 
-7. Verify message
+#### 7. Verify message
 
 ```ruby
 SR25519.verify(address, message, signature_result)
