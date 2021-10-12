@@ -6,8 +6,8 @@ module SR25519Lib
   ffi_lib FFI::Library::LIBC
 
   # The library is compile from https://github.com/Warchant/sr25519-crust
-  ffi_lib [File.expand_path('lib/libsr25519crust.so')] if RUBY_PLATFORM =~ /linux/
-  ffi_lib [File.expand_path('lib/libsr25519crust.dylib')] if RUBY_PLATFORM =~ /darwin/
+  ffi_lib File.dirname(__FILE__) + '/libsr25519crust.so' if RUBY_PLATFORM =~ /linux/
+  ffi_lib File.dirname(__FILE__) + '/libsr25519crust.dylib' if RUBY_PLATFORM =~ /darwin/
 
   attach_function :sr25519_keypair_from_seed, [:pointer, :pointer], :void
   attach_function :sr25519_verify, [:pointer, :pointer, :uint, :pointer], :bool
