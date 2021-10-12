@@ -2,12 +2,12 @@
 
 RSpec.describe Sr25519 do
 
-  it "get keypaie" do
+  it "get keypair" do
     seed = "fac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
     expect(SR25519.sr25519_keypair_from_seed(seed).to_s.size).to eq(96 * 2)
   end
 
-  it "get keypaie which start with 0x" do
+  it "get keypair which start with 0x" do
     seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
     expect(SR25519.sr25519_keypair_from_seed(seed).to_s.size).to eq(96 * 2)
   end

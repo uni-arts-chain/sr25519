@@ -32,7 +32,7 @@ require "sr25519"
 ```ruby
 # seed is priviate key, is a hex string.
 # example: SR25519.sr25519_keypair_from_seed("0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e")
-keypaire = SR25519.sr25519_keypair_from_seed(seed)
+keypair = SR25519.sr25519_keypair_from_seed(seed)
 
 ```
 
