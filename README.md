@@ -27,16 +27,16 @@ Or install it yourself as:
 require "sr25519"
 ```
 
-#### 2.  Generate keypair
+#### 2. SR25519 Generate keypair
 
 ```ruby
 # seed is priviate key, is a hex string.
-# example: SR25519.sr25519_keypair_from_seed("0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e")
-keypair = SR25519.sr25519_keypair_from_seed(seed)
+# example: SR25519.keypair_from_seed("0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e")
+keypair = SR25519.keypair_from_seed(seed)
 
 ```
 
-#### 3. Generate public_key
+#### 3. SR25519 Generate public_key
 
 ```ruby
 public_key = SR25519.get_public_key_from_seed(seed)
@@ -57,18 +57,37 @@ address = Address.encode(public_key.to_s)
 address = Address.decode(address)
 ```
 
-#### 6. Sign message
+#### 6. SR25519 Sign message
 
 ```ruby
 signature_result = SR25519.sign(message, keypair)
 
 ```
 
-#### 7. Verify message
+#### 7. SR25519 Verify message
 
 ```ruby
 SR25519.verify(address, message, signature_result)
 ```
+
+#### 8.  ED25519 Generate keypair
+
+```ruby
+ED25519.keypair_from_seed(seed)
+```
+
+#### 9.  ED25519 Sign message
+
+```ruby
+ED25519.sign(message, keypair)
+```
+
+#### 10. ED25519 Verify message
+
+```ruby
+ED25519.verify(address, message, signature_result)
+```
+
 
 ## Running tests
 1. Run all tests

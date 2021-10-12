@@ -65,7 +65,7 @@ class SR25519
   def self.sr25519_sign(message, private_key)
     sig = SigMessage.new
     msg = FFI::MemoryPointer.from_string(message)
-    key_pair = self.sr25519_keypair_from_seed(private_key)
+    key_pair = self.keypair_from_seed(private_key)
     public_key = key_pair.public_key
     SR25519Lib.sr25519_sign(sig, public_key, key_pair, msg, message.length)
     sig.to_s
@@ -97,7 +97,7 @@ class SR25519
     verify = SR25519Lib.sr25519_verify(sig, msg, message.size, pk)
   end
 
-  def self.sr25519_keypair_from_seed(seed)
+  def self.keypair_from_seed(seed)
     if seed.start_with?("0x")
       seed = seed.sub(/0x/, "")
     end
@@ -110,7 +110,7 @@ class SR25519
   end
 
   def self.get_public_key_from_seed(seed)
-    key_pair = self.sr25519_keypair_from_seed(seed)
+    key_pair = self.keypair_from_seed(seed)
     key_pair.public_key
   end
 

@@ -34,5 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "blake2b"
   spec.add_dependency "base58"
   spec.add_development_dependency "ffi", "~> 1.15.0"
-
+  spec.add_dependency "ed25519", '~> 1.2', '>= 1.2.4'
 end
