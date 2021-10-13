@@ -14,7 +14,11 @@ class ED25519
     public_key = Address.decode(address)
     verify_key_bytes = [public_key].pack("H*")
     verify_key  = Ed25519::VerifyKey.new(verify_key_bytes)
-    verify_key.verify(signature, message)
+    begin
+      verify_key.verify(signature, message)
+    rescue
+      return false
+    end
   end
 
   def self.keypair_from_seed(seed)

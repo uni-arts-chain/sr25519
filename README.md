@@ -67,25 +67,25 @@ signature_result = SR25519.sign(message, keypair)
 #### 7. SR25519 Verify message
 
 ```ruby
-SR25519.verify(address, message, signature_result)
+verify_result = SR25519.verify(address, message, signature_result)
 ```
 
 #### 8.  ED25519 Generate keypair
 
 ```ruby
-ED25519.keypair_from_seed(seed)
+keypair = ED25519.keypair_from_seed(seed)
 ```
 
 #### 9.  ED25519 Sign message
 
 ```ruby
-ED25519.sign(message, keypair)
+signature_result = ED25519.sign(message, keypair)
 ```
 
 #### 10. ED25519 Verify message
 
 ```ruby
-ED25519.verify(address, message, signature_result)
+verify_result = ED25519.verify(address, message, signature_result)
 ```
 
 
