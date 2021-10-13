@@ -54,12 +54,13 @@ address = Address.encode(public_key.to_s)
 #### 5. Decode address
 
 ```ruby
-address = Address.decode(address)
+public_key_str = Address.decode(address)
 ```
 
 #### 6. SR25519 Sign message
 
 ```ruby
+# message = "Hello World"
 signature_result = SR25519.sign(message, keypair)
 
 ```
@@ -82,9 +83,17 @@ keypair = ED25519.keypair_from_seed(seed)
 signature_result = ED25519.sign(message, keypair)
 ```
 
-#### 10. ED25519 Verify message
+#### 10. ED25519 Get public key
 
 ```ruby
+pulick_key_str = ED25519.get_public_key_from_seed(seed)
+```
+
+#### 11. ED25519 Verify message
+
+```ruby
+# public_key_str = ED25519.get_public_key_from_seed(seed)
+# address = Address.encode(public_key_str)
 verify_result = ED25519.verify(address, message, signature_result)
 ```
 
