@@ -1,9 +1,11 @@
 require "ed25519"
 class ED25519
   
-  ##
-  # Sign the given message, Return sign result as hex string
-  # ==== Examples
+  # Sign the given message
+  # @param message [String] the message
+  # @param key_pair [Class] ED25519 keypair
+  # @return [String] sign result as a hex string
+  # @example
   #   message = "Hello world"
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   keypair = ED25519.keypair_from_seed(seed)
@@ -14,8 +16,11 @@ class ED25519
   end
 
   ##
-  # Verify the sign result, Return true or false
-  # ==== Examples
+  # Verify the sign result
+  # @param message [String] the message
+  # @param key_pair [Class] ED25519 keypair
+  # @return [String] sign result as a hex string
+  # @example
   #   message = "Hello world"
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   public_key = ED25519.get_public_key_from_seed(seed)
@@ -41,7 +46,9 @@ class ED25519
 
   ##
   # Generate ED25519 keypair
-  # ==== Examples
+  # @param seed [String] private key
+  # @return [Class] ED25519 keypair
+  # @example
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   keypair = ED25519.keypair_from_seed(seed)
 
@@ -55,8 +62,10 @@ class ED25519
   end
 
   ##
-  # Get ED25519 public key, return as hex string
-  # ==== Examples
+  # Get ED25519 public key
+  # @param seed [String] private key
+  # @return [String] public key
+  # @example
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   public_key = ED25519.get_public_key_from_seed(seed)
 

@@ -65,9 +65,11 @@ end
 
 class SR25519
 
-  ##
-  # Return the sign message result as hex string
-  # ==== Examples
+  # Sign message result
+  # @param message [String] message
+  # @param private_key [String] private_key
+  # @return [String] sign result
+  # @example
   #   message = "Hello World"
   #   private_key = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   signature_result = SR25519.sr25519_sign(message, private_key)
@@ -80,9 +82,11 @@ class SR25519
     sig.to_s
   end
 
-  ##
-  # Return the sign message result as hex string
-  # ==== Examples
+  # Sign message result
+  # @param message [String] message
+  # @param key_pair [KeyPair] Sr25519 keypair
+  # @return [String] sign result
+  # @example
   #   message = "Hello World"
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   keypair = SR25519.keypair_from_seed(seed)
@@ -95,9 +99,12 @@ class SR25519
     sig.to_s
   end
 
-  ##
-  # Verify the sign result, Return true or false
-  # ==== Examples
+  # Verify the sign result
+  # @param address [String] account address
+  # @param message [String] message
+  # @param signature_result [String] Sr25519 sign result
+  # @return [boolean] sign result
+  # @example
   #   message = "Hello World"
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   keypair = SR25519.keypair_from_seed(seed)
@@ -121,9 +128,10 @@ class SR25519
     verify = SR25519Lib.sr25519_verify(sig, msg, message.size, pk)
   end
 
-  ##
   # Generate SR25519 keypair
-  # ==== Examples
+  # @param seed [String] private key
+  # @return [KeyPair] SR25519 keypair
+  # @example
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   keypair = SR25519.keypair_from_seed(seed)
   def self.keypair_from_seed(seed)
@@ -138,9 +146,10 @@ class SR25519
     return key_pair
   end
 
-  ##
-  # Get SR25519 public key, need call to_s to get hex string
-  # ==== Examples
+  # Get SR25519 public key
+  # @param seed [String] private key
+  # @return [String] public key
+  # @example
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   public_key = SR25519.get_public_key_from_seed(seed)
   def self.get_public_key_from_seed(seed)
@@ -148,9 +157,11 @@ class SR25519
     key_pair.public_key
   end
 
-  ##
-  # Get public from address
-  # ==== Examples
+  # Get SR25519 public key
+  # @param address [String] account address
+  # @param addr_type [Interger] address type
+  # @return [String] public key
+  # @example
   #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
   #   public_key = SR25519.get_public_key_from_seed(seed)
   #   address = Address.encode(public_key.to_s)
