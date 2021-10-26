@@ -5,7 +5,6 @@ module SR25519Lib
  
   ffi_lib FFI::Library::LIBC
 
-  # The library is compile from https://github.com/Warchant/sr25519-crust
   ffi_lib File.dirname(__FILE__) + '/libsr25519crust.so' if RUBY_PLATFORM =~ /linux/
   ffi_lib File.dirname(__FILE__) + '/libsr25519crust.dylib' if RUBY_PLATFORM =~ /darwin/
 
@@ -19,6 +18,8 @@ class KeyPair < FFI::Struct
   # [32b key | 32b nonce | 32b public]
   layout :String, [:uint8, 96]
 
+  ##
+  # Return the keypair public key
   def public_key
     pub_key = self[:String].to_a[64..96]
     public_key = PublicKey.new
@@ -55,6 +56,8 @@ end
 class SigMessage < FFI::Struct
   layout :String, [:uint8, 64]
 
+  ##
+  # Return the sign message as hex string
   def to_s
     self[:String].to_a.pack("c*").unpack1("H*")
   end
@@ -62,6 +65,12 @@ end
 
 class SR25519
 
+  ##
+  # Return the sign message result as hex string
+  # ==== Examples
+  #   message = "Hello World"
+  #   private_key = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
+  #   signature_result = SR25519.sr25519_sign(message, private_key)
   def self.sr25519_sign(message, private_key)
     sig = SigMessage.new
     msg = FFI::MemoryPointer.from_string(message)
@@ -71,8 +80,13 @@ class SR25519
     sig.to_s
   end
 
-
-  # Creates a signature for given data
+  ##
+  # Return the sign message result as hex string
+  # ==== Examples
+  #   message = "Hello World"
+  #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
+  #   keypair = SR25519.keypair_from_seed(seed)
+  #   signature_result = SR25519.sign(message, keypair)
   def self.sign(message, key_pair)
     sig = SigMessage.new
     msg = FFI::MemoryPointer.from_string(message)
@@ -81,6 +95,16 @@ class SR25519
     sig.to_s
   end
 
+  ##
+  # Verify the sign result, Return true or false
+  # ==== Examples
+  #   message = "Hello World"
+  #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
+  #   keypair = SR25519.keypair_from_seed(seed)
+  #   public_key = SR25519.get_public_key_from_seed(seed)
+  #   address = Address.encode(public_key.to_s)
+  #   signature_result = SR25519.sign(message, keypair)
+  #   verify_result = SR25519.verify(address, message, signature_result)
   def self.verify(address, message, signature_result)
     pk = PublicKey.new
     public_key = self.decode_address(address)
@@ -97,6 +121,11 @@ class SR25519
     verify = SR25519Lib.sr25519_verify(sig, msg, message.size, pk)
   end
 
+  ##
+  # Generate SR25519 keypair
+  # ==== Examples
+  #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
+  #   keypair = SR25519.keypair_from_seed(seed)
   def self.keypair_from_seed(seed)
     if seed.start_with?("0x")
       seed = seed.sub(/0x/, "")
@@ -109,11 +138,23 @@ class SR25519
     return key_pair
   end
 
+  ##
+  # Get SR25519 public key, need call to_s to get hex string
+  # ==== Examples
+  #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
+  #   public_key = SR25519.get_public_key_from_seed(seed)
   def self.get_public_key_from_seed(seed)
     key_pair = self.keypair_from_seed(seed)
     key_pair.public_key
   end
 
+  ##
+  # Get public from address
+  # ==== Examples
+  #   seed = "0xfac7959dbfe72f052e5a0c3c8d6530f202b02fd8f9f5ca3580ec8deb7797479e"
+  #   public_key = SR25519.get_public_key_from_seed(seed)
+  #   address = Address.encode(public_key.to_s)
+  #   public_key = SR25519.decode_address(address)
   def self.decode_address(address,addr_type=42)
     public_address = Address.decode(address,addr_type)
   end

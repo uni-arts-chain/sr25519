@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sr25519 (0.6.0)
+    sr25519 (0.7.0)
       base58
       blake2b
       ed25519 (~> 1.2, >= 1.2.4)
