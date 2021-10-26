@@ -65,7 +65,7 @@ end
 
 class SR25519
 
-  # Sign message result
+  # Sign message
   # @param message [String] message
   # @param private_key [String] private_key
   # @return [String] sign result
@@ -82,7 +82,7 @@ class SR25519
     sig.to_s
   end
 
-  # Sign message result
+  # Sign message
   # @param message [String] message
   # @param key_pair [KeyPair] Sr25519 keypair
   # @return [String] sign result
@@ -99,7 +99,7 @@ class SR25519
     sig.to_s
   end
 
-  # Verify the sign result
+  # Verify the sign
   # @param address [String] account address
   # @param message [String] message
   # @param signature_result [String] Sr25519 sign result
